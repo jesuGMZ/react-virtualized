@@ -25,6 +25,9 @@ export default class List extends PureComponent {
     /** Optional CSS class name */
     className: PropTypes.string,
 
+    /** Optional inner children Grid CSS class name */
+    childrenClassName: PropTypes.string,
+
     /**
      * Used to estimate the total height of a List before all of its rows have actually been measured.
      * The estimated total height is adjusted as rows are rendered.
@@ -156,6 +159,7 @@ export default class List extends PureComponent {
   render () {
     const {
       className,
+      childrenClassName,
       noRowsRenderer,
       scrollToIndex,
       width
@@ -169,6 +173,7 @@ export default class List extends PureComponent {
         autoContainerWidth
         cellRenderer={this._cellRenderer}
         className={classNames}
+        childrenClassName={childrenClassName}
         columnWidth={width}
         columnCount={1}
         noContentRenderer={noRowsRenderer}

@@ -80,6 +80,9 @@ export default class Grid extends PureComponent {
      */
     className: PropTypes.string,
 
+    /** Optional custom CSS class name to attach to inner children Grid element. */
+    childrenClassName: PropTypes.string,
+
     /**
      * Number of columns in grid.
      */
@@ -800,6 +803,7 @@ export default class Grid extends PureComponent {
       autoHeight,
       autoWidth,
       className,
+      childrenClassName,
       containerStyle,
       height,
       id,
@@ -876,7 +880,10 @@ export default class Grid extends PureComponent {
       >
         {childrenToDisplay.length > 0 &&
           <div
-            className='ReactVirtualized__Grid__innerScrollContainer'
+            className={cn(
+              'ReactVirtualized__Grid__innerScrollContainer',
+              childrenClassName
+            )}
             style={{
               width: autoContainerWidth ? 'auto' : totalColumnsWidth,
               height: totalRowsHeight,
