@@ -1,9 +1,10 @@
 /** @flow */
-import PropTypes from 'prop-types'
-import { Component } from 'react'
-import defaultHeaderRenderer from './defaultHeaderRenderer'
-import defaultCellRenderer from './defaultCellRenderer'
-import defaultCellDataGetter from './defaultCellDataGetter'
+import PropTypes from 'prop-types';
+import {Component} from 'react';
+import defaultHeaderRenderer from './defaultHeaderRenderer';
+import defaultCellRenderer from './defaultCellRenderer';
+import defaultCellDataGetter from './defaultCellDataGetter';
+import SortDirection from './SortDirection';
 
 /**
  * Describes the header and cell contents of a table column.
@@ -31,8 +32,14 @@ export default class Column extends Component {
     /** Optional additional data passed to this column's :cellDataGetter */
     columnData: PropTypes.object,
 
-    /** Uniquely identifies the row-data attribute correspnding to this cell */
+    /** Uniquely identifies the row-data attribute corresponding to this cell */
     dataKey: PropTypes.any.isRequired,
+
+    /** Optional direction to be used when clicked the first time */
+    defaultSortDirection: PropTypes.oneOf([
+      SortDirection.ASC,
+      SortDirection.DESC,
+    ]),
 
     /** If sort is enabled for the table at large, disable it for this column */
     disableSort: PropTypes.bool,
@@ -52,6 +59,9 @@ export default class Column extends Component {
      */
     headerRenderer: PropTypes.func.isRequired,
 
+    /** Optional inline style to apply to this column's header */
+    headerStyle: PropTypes.object,
+
     /** Optional id to set on the column header */
     id: PropTypes.string,
 
@@ -68,15 +78,16 @@ export default class Column extends Component {
     style: PropTypes.object,
 
     /** Flex basis (width) for this column; This value can grow or shrink based on :flexGrow and :flexShrink properties. */
-    width: PropTypes.number.isRequired
+    width: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     cellDataGetter: defaultCellDataGetter,
     cellRenderer: defaultCellRenderer,
+    defaultSortDirection: SortDirection.ASC,
     flexGrow: 0,
     flexShrink: 1,
     headerRenderer: defaultHeaderRenderer,
-    style: {}
+    style: {},
   };
 }
